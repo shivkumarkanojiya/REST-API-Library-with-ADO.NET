@@ -1,0 +1,8 @@
+is_global = true
+build_property.RootNamespace = LibraryAPI
+build_property.ProjectDir = C:\Users\91865\Desktop\mvc\REST-API-Library-with-ADO.NET\LibraryAPI\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.CsWinRTUseWindowsUIXamlProjections = false
+build_property.EffectiveAnalysisLevelStyle = 
+build_property.EnableCodeStyleSeverity = 
