@@ -48,10 +48,32 @@ namespace LibraryAPI
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                     };
                 });
-            services.AddSwaggerGen(options =>
+            // Add Swagger with JWT support
+            services.AddSwaggerGen(c =>
             {
-                options.SwaggerDoc(name: "v1", new OpenApiInfo { Title = "LibraryAPI by Kamal Guliyev", Version = "v1"});
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+
+                var securityScheme = new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Description = "Enter 'Bearer {your_token}'",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer"
+                    }
+                };
+
+                c.AddSecurityDefinition("Bearer", securityScheme);
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        { securityScheme, new string[] {} }});
             });
+
             services.AddRouting(options => options.LowercaseUrls = true);
             services.AddMvc();
         }
